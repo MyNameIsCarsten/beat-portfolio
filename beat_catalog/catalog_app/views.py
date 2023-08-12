@@ -41,22 +41,11 @@ def home(request):
       }
 
     elif 'filter_bpm' in request.POST:
+      filter_value = request.POST['filter_bpm']
 
       # Ausgewählte Objekte aus Datenbank holen
-      all_items = Beat.objects.all()
-      keys = Beat.objects.values('key').distinct()
-      min_bpm = Beat.objects.filter().order_by('bpm').first().bpm
-      max_bpm = Beat.objects.filter().order_by('bpm').last().bpm
-      mid_bpm = round((min_bpm + max_bpm) / 2, 0)
+      context['all_items'] = Beat.objects.filter(bpm=filter_value).values()
 
-      context = {
-        'all_items': all_items,
-        'keys': keys,
-        'min_bpm': min_bpm,
-        'max_bpm': max_bpm,
-        'mid_bpm': mid_bpm
-      }
-      print(context)
 
     else:
       folder_path = request.POST['path']
@@ -94,5 +83,5 @@ def home(request):
       'max_bpm': max_bpm,
       'mid_bpm': mid_bpm
     }
-  print(context['keys'])
+
   return render(request, "catalog_app/home.html", context)
