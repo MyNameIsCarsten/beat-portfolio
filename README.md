@@ -19,3 +19,5 @@ In order to fill the database you will need to provide a path e.g.:
 
 Note: Submitting a path more than one will lead to duplicate entries.
 
+## Delete entry from database
+Click on the `delete` button in a row to delete the entry.
