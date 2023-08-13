@@ -11,44 +11,44 @@
 
 <body>
   <header>
-    <div>
-      <h1>Beat Catalog</h1>
+    <h1>Beat Catalog</h1>
+    <div class="flex">
       <form action="" method="post">
         {% csrf_token %}
-        <label>Path:</label>
+        <label>Path:</label><br><br>
         <input type="text" name="path" value=""><br><br>
         <input type="submit" value="Submit">
       </form>
       <form action="" method="post">
         {% csrf_token %}
-        <label>Delete Database:</label>
-        <input type="hidden" name="delete_all" value=""><br><br>
-        <input type="submit" value="Delete">
+        <input type="submit" name="delete_all" value="Delete Database">
       </form>
 
       <form action="" method="post">
         {% csrf_token %}
         <label>Selected BPM for filtering: <output id="bpm_value"></output></label><br><br>
-        <span>{{ mid_bpm }}</span>
+        <span>{{ min_bpm }}</span>
         <input id="bpm_select" type="range" name="filter_bpm" value="{{ mid_bpm }}" min="{{ min_bpm }}" max="{{ max_bpm }}">
         <span>{{ max_bpm }}</span>
         <input type="submit" value="Filter BPM">
       </form>
 
+      <form action="" method="post" class="item" >
+        {% csrf_token %}
+        <label>Which key do you want to filter?</label><br><br>
+        <select name="key">
+          {% for key in keys %}
+          <option value="{{ key.key }}">{{ key.key }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+      </form>
 
-
+      <!--
       <div class="container">
-          <form action="" method="post" class="item" >
-            {% csrf_token %}
-            	<label>Which key do you want to filter?</label>
-                <select name="key">
-                    {% for key in keys %}
-                    <option value="{{ key.key }}">{{ key.key }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Submit">
-          </form>
+          <p> Beats currently added to mail: <output id="beat_list"></output></p>
       </div>
+      -->
     </div>
 
   </header>
@@ -65,7 +65,10 @@
           <th class="cell">BPM</th>
           <th class="cell">Key</th>
           <th class="cell">Path</th>
+          <th class="cell">Delete Entry</th>
+          <!--
           <th class="cell"></th>
+          -->
         </tr>
       </thead>
       <tbody>
@@ -75,13 +78,19 @@
           <td class="cell">{{ beat.name }}</td>
           <td class="cell">{{ beat.bpm }}</td>
           <td class="cell">{{ beat.key }}</td>
-          <td class="cell">{{ beat.full_path}}</td>
+          <td class="cell" id="myVar">{{ beat.full_path}}</td>
           <td class="cell">
             <form action="" method="post">
-            {% csrf_token %}
-              <button name="row_id" value={{ row.id }}>delete</button>
+              {% csrf_token %}
+              <button name="row_id" value={{ beat.id }}>delete</button>
             </form>
           </td>
+          <!--
+          <td class="cell">
+            {% csrf_token %}
+            <button name="add_mail" onclick="addSubject()">add to mail</button>
+          </td>
+          -->
         </tr>
       {% endfor %}
       </tbody>
@@ -98,6 +107,17 @@ value.textContent = input.value;
 input.addEventListener("input", (event) => {
   value.textContent = event.target.value;
 });
+
+/*
+const beat_list = [];
+var beat = document.getElementById("myVar").innerHTML;
+
+function addSubject() {
+beat_list.push(beat);
+document.getElementById("beat_list").innerHTML = beat_list;
+}
+*/
+
 </script>
 </body>
 </html>

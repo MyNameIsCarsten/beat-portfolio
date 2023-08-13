@@ -10,10 +10,29 @@ body {
 
 }
 
+button,input[type=submit] {
+  background-color: #eb0000;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+button:hover,input[type=submit]:hover {
+    background-color: #2b2b2b;
+}
+
 h1 {
   text-align: center;
   color: #ffffff;
-  padding-top: 100px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: -webkit-xxx-large;
 }
 
 form {
@@ -24,6 +43,7 @@ form {
 
 label {
   color: white;
+  font-size: 1.4em;
 }
 
 input[type="submit"]  {
@@ -31,6 +51,16 @@ input[type="submit"]  {
   color: white;
 }
 
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1b1b1b;
+    margin-right: 6em;
+    margin-left: 6em;
+    border-radius: 1em;
+}
 
 .wrapper {
   margin: 0 auto;
@@ -86,10 +116,12 @@ input[type="submit"]  {
   }
 }
 
+/*
 .container {
   display: flex;
   justify-content: center;
 }
+*/
 
 
 table {
@@ -102,17 +134,76 @@ th,td {
   overflow: auto;
 }
 
-/*Address*/
-.cell:nth-child(1) {
-  width: 300px;
+
+/*Path text*/
+.cell:nth-child(5) {
+  width: 40em;
 }
 
-/*Title*/
-.cell:nth-child(2) {
-  width: 200px;
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
 }
 
-/*Meta text*/
-.cell:nth-child(4) {
-  width: 300px;
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+   background-color: #eb0000;
+   border-radius: 0.5rem;
+   height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -12px; /* Centers thumb on the track */
+
+   /*custom styles*/
+   background-color: #eb0000;
+   border-radius:10em;
+   height: 2rem;
+   width: 1rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+   background-color: #eb0000;
+   border-radius: 0.5rem;
+   height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+   border: none; /*Removes extra border that FF applies*/
+   border-radius: 0; /*Removes default border-radius that FF applies*/
+
+   /*custom styles*/
+   background-color: #eb0000;
+   border-radius:10em;
+   height: 2rem;
+   width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;
 }
